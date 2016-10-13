@@ -11,7 +11,7 @@ import java.util.Map;
 public class HashMapExample {
 
     public Map<String, String> insertMap(){
-        HashMap<String, String> maps = new HashMap<>(10);
+        HashMap<String, String> maps = new HashMap<>(1);
         for (int i = 0 ; i < 10 ;i++) {
             maps.put(i + "", i + "");
         }
