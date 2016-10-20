@@ -15,5 +15,5 @@ public class LinkedHashMapExampleTest extends TestCase {
         LinkedHashMap<String,String> map = example.insertMap();
         example.printMaps(map);
     }
-    
+
 }
