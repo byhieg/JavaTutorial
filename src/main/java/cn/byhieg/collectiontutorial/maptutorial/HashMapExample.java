@@ -28,8 +28,8 @@ public class HashMapExample {
         Iterator iterator = maps.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = (Map.Entry<String, String>) iterator.next();
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
+            System.out.print("Key = " + entry.getKey());
+            System.out.println("  value = " + entry.getValue());
         }
     }
 
