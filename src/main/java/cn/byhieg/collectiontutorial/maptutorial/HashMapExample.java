@@ -5,4 +5,12 @@ package cn.byhieg.collectiontutorial.maptutorial;
  * Mail byhieg@gmail.com
  */
 public class HashMapExample {
+
+
+    public static void main(String[] args) {
+
+
+    }
+
+
 }
