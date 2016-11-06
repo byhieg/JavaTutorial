@@ -14,7 +14,7 @@ public class OutputStreamWriterExample {
     public void writeToFile() throws Exception{
         try (Writer writer = new OutputStreamWriter(new FileOutputStream("D:" + File.separator + "write_file.txt"))) {
             for (int i = 0 ; i < 10000;i++) {
-                writer.write(i + "");
+                writer.write("我是中国人" + "");
                 writer.write("\r\n");
             }
         }
