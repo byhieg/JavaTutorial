@@ -9,7 +9,7 @@ import junit.framework.TestCase;
  */
 public class ByteArrayOutPutStreamExampleTest extends TestCase {
     public void testWriteFromFile() throws Exception {
-        new ByteArrayOutPutStreamExample().writeFromFile();
+        new ByteArrayOutPutStreamExample().writeToBytes();
     }
 
 }

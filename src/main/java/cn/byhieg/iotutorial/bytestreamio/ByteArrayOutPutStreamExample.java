@@ -11,7 +11,7 @@ import java.io.InputStream;
  */
 public class ByteArrayOutPutStreamExample {
 
-    public void writeFromFile() throws Exception {
+    public void writeToBytes() throws Exception {
         try (InputStream is = new FileInputStream("D://read_file.txt")) {
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             byte[] bytes = new byte[1024];
