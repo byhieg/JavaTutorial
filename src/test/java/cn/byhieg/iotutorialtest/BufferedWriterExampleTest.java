@@ -9,7 +9,7 @@ import junit.framework.TestCase;
  */
 public class BufferedWriterExampleTest extends TestCase {
     public void testWriteToFile() throws Exception {
-        
+
         new BufferedWriterExample().writeToFile();
 
     }

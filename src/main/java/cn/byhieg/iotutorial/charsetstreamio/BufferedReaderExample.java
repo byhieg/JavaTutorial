@@ -12,9 +12,9 @@ public class BufferedReaderExample {
 
     public void readFromFile() throws Exception{
         try(BufferedReader reader = new BufferedReader(new FileReader("D:" + File.separator + "read_file.txt"))){
-            char[] chars = new char[1024];
-            while (reader.read(chars) != -1) {
-                System.out.println(chars);
+            String str;
+            while ((str = reader.readLine()) != null) {
+                System.out.println(str);
             }
         }
     }
