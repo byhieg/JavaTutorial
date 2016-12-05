@@ -14,5 +14,4 @@ public class SonSynTreadTest extends TestCase {
 
         Thread.sleep(1000 * 10);
     }
-
 }
