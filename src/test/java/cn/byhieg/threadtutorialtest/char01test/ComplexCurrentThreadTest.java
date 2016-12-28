@@ -13,7 +13,7 @@ public class ComplexCurrentThreadTest extends TestCase {
     public void testRun() throws Exception {
         ComplexCurrentThread thread = new ComplexCurrentThread();
         thread.setName("byhieg");
-        thread.start();
+        new Thread(thread).start();
 
         Thread.sleep(3000);
     }
