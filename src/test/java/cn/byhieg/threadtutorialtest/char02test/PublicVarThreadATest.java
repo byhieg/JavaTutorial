@@ -15,6 +15,8 @@ public class PublicVarThreadATest extends TestCase {
         threadA.start();
         Thread.sleep(40);
         publicVarRef.getValue();
+
+        Thread.sleep(1000 * 5);
     }
 
 }

@@ -21,7 +21,7 @@ public class PublicVar {
         }
     }
 
-    synchronized public void getValue(){
+     public void getValue(){
         System.out.println("getValue method thread name=" + Thread.currentThread().getName() + " username=" + username
                             + " password=" + password);
     }

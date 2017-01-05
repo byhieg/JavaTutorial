@@ -15,10 +15,8 @@ public class HasSelfPrivateNumTest extends TestCase {
         HasSelfPrivateNum numB = new HasSelfPrivateNum();
         SelfPrivateThreadA threadA = new SelfPrivateThreadA(numA);
         threadA.start();
-        SelfPrivateThreadB threadB = new SelfPrivateThreadB(numA);
+        SelfPrivateThreadB threadB = new SelfPrivateThreadB(numB);
         threadB.start();
-
         Thread.sleep(1000 * 3);
     }
-
 }
