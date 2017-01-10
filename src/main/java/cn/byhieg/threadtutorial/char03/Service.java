@@ -24,7 +24,7 @@ public class Service {
                 System.out.println("begin notify() ThreadName=" + Thread.currentThread().getName() +
                         " time=" +System.currentTimeMillis());
                 lock.notify();
-                Thread.sleep(1000 * 5);
+                Thread.sleep(1000 * 1);
                 System.out.println("end notify() ThreadName=" + Thread.currentThread().getName() +
                         " time=" + System.currentTimeMillis());
             }
