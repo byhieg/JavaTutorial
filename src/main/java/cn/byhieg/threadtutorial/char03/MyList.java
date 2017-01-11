@@ -8,7 +8,7 @@ import java.util.List;
  * Mail byhieg@gmail.com
  */
 public class MyList {
-    private static List list = new ArrayList();
+    public static List list = new ArrayList();
 
     public static void add(){
         list.add("anyString");
