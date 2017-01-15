@@ -5,6 +5,7 @@
 
 ## ThreadTutorial内容说明
 在源码路径下`cn.byhieg.threadtutorial`中放置的是Java多线程的代码和测试例子，在每一个章的包下，都有一个ReadMe来说明该章的知识点。
+
 在char01包里放置Java多线程基本知识的代码。内容如下：
 
 1. 如何使用多线程
@@ -19,6 +20,12 @@
 2. 对于语句块的同步处理
 3. 对类加锁的同步处理
 4. 保证可见性的关键字——volatile
+
+在char03包里放置了Java线程间通信的知识的代码。内容如下：
+
+1. 等待/通知机制
+2. join方法的使用
+
 
 ## ReflectionTutorial内容说明
 在源码路径下`cn.byhieg.reflectiontutorial`中放置的是Java反射的代码和测试例子，在每一个章的包下，都有一个ReadMe来说明该章的知识点。
