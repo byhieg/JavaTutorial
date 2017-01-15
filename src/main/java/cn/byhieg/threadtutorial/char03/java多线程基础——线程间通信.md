@@ -290,6 +290,8 @@ public class JoinThread extends Thread{
 
 ## 总结
 这里介绍了线程间通信的一种常见的方式——等待/通知机制。此外，还介绍了一种指定线程执行顺序的方法——join方法，并且讲解了其内部的实现。
+全部的代码都在[char03线程间通信](https://github.com/byhieg/JavaTutorial/tree/master/src/main/java/cn/byhieg/threadtutorial/char03)
+
 
 
 
