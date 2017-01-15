@@ -125,10 +125,164 @@ end notify() ThreadName=Thread-2 time=1484302438110
 ```
 测试方法，首先调用上wait的例子，让ServiceThread线程进入等待状态，然后执行2个含有notify操作的线程，可以看出，第一个notify执行完，wait线程并没有立即开始运行，而是Thread-1继续执行后续的notify方法，直到同步语句块结束，然后wait线程立即得到锁，并继续运行。之后Thread-2开始运行，直到结束，因为已经没有等待的线程，所以不会有后续的等待的线程运行。
 这里，可以看出一个细节，竞争锁的线程有3个，一个包含wait线程，两个包含notify线程。第一个notify执行结束，获得锁一定是阻塞的线程，而不是另一个notify的线程。
+上面的程序展现了等待/通知机制是如何通过wait和notify实现。在这里，我们可以看出wait方法使线程进入等待，和`Thread.sleep`是很相似的。但是两者却截然不同，区别如下：
+-   wait使线程进入等待，是可以被通知唤醒的，但是sleep只能自己到时间唤醒。
+-   wait方法是对象锁调用的成员方法，而sleep却是Thread类的静态方法
+-   wait方法出现在同步方法或者同步代码块中，但是sleep方法可以出现在非同步代码中。
 
+wait和notify还提供了几个其他API，如`wait(long timeout)`该方法可以提供一个唤醒的时间，如果在时间内，没有其他线程唤醒该等待线程，则到设定的时间，会自动结束等待。
+因为notify仅仅能唤醒一个线程，所以Java提供了一个`notifyAll()`的方法来唤醒所有的线程，让所有的线程来竞争。我们看一下只唤醒一个线程和唤醒所有线程的不同。
+```
+public class CommonWait {
 
+    private Object object;
+    public CommonWait(Object object){
+        this.object = object;
+    }
 
+    public void doSomething() throws Exception{
+        synchronized (object){
+            System.out.println("begin wait  " + Thread.currentThread().getName());
+            object.wait();
+            System.out.println("end wait " + Thread.currentThread().getName());
+        }
+    }
+}
+```
+```
+public class CommonNotify {
 
+    private Object object;
+    public CommonNotify(Object object){
+        this.object = object;
+    }
+
+    public void doNotify(){
+        synchronized (object){
+            System.out.println("准备通知");
+            object.notify();
+            System.out.println("通知结束");
+        }
+    }
+}
+```
+测试通知一个等待线程
+```
+ public void testRun() throws Exception{
+        Object lock = new Object();
+        new Thread(()->{
+            try {
+                new CommonWait(lock).doSomething();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        new Thread(()->{
+            try {
+                new CommonWait(lock).doSomething();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        Thread.sleep(1000);
+
+        new Thread(()->{
+            new CommonNotify(lock).doNotify();
+        }).start();
+
+        Thread.sleep(1000 * 3);
+
+    }
+```
+结果如下：
+```
+begin wait  Thread-0
+begin wait  Thread-1
+准备通知
+通知结束
+end wait Thread-0
+```
+结果看来，只有一个线程结束了等待，继续往下面执行。另一个线程直到结束也没有执行。
+现在看一下notifyAll的效果，把`CommonNotify`这个类中的`object.notify();`改成`object.notifyAll()`
+其他的不变，看看结果：
+```
+begin wait  Thread-0
+begin wait  Thread-1
+准备通知
+通知结束
+end wait Thread-1
+end wait Thread-0
+```
+很明显，两个等待线程都执行了，而且这次Thread-1的线程先执行，可见通知唤醒是随机的。
+这里详细说一下，这个结果。wait使线程进入了阻塞状态，阻塞状态可以细分为3种：
+-  等待阻塞：运行的线程执行wait方法，JVM会把该线程放入等待队列中。
+-  同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池当中。
+-   其他阻塞： 运行的线程执行了`Thread.sleep`或者`join`方法，或者发出I/O请求时，JVM会把该线程置为阻塞状态。当`sleep()`状态超时、join()等待线程终止，或者超时、或者I/O处理完毕时，线程重新转入可运行状态。
+
+可运行状态就是线程执行`start`时，就是可运行状态，一旦CPU切换到这个线程就开始执行里面的run方法就进入了运行状态。
+上面会出现这个结果，就是因为notify仅仅让一个线程进入了可运行状态，而另一个线程则还在阻塞中。而`notifyAll`则使所有的线程都从等待队列中出来，而因为同步代码的关系，获得锁的线程进入可运行态，没有得到锁的则进入锁池，也是阻塞状态，但是会因为锁的释放而重新进入可运行态。所以notifyAll会让所有wait的线程都会继续执行。
+
+## join方法的使用
+wait方法使线程进入阻塞，并且因为通知而唤醒执行，sleep方法同样使线程进入阻塞，并且因此超时而结束阻塞。以上两者都是因为特定的条件而结束阻塞，现在主线程需要知道子线程的结果再继续执行，这个时候要怎么做，用通知/等待不是很好适用于这个情况，sleep则完全不知道要等待的时间。因此Java提供了一个`join()`方法，`join()`方法是Thread对象的方法，他的功能是使所属的线程对象x正常执行run方法的内容，而使当前线程z进行无限期的阻塞，等待线程x销毁后在继续执行线程z后面的代码。这说起来有点绕口，其实看例子就很简单。
+```
+public class JoinThread extends Thread{
+    @Override
+    public void run() {
+        super.run();
+        try{
+            int secondValue = (int)(Math.random() * 10000);
+            System.out.println(secondValue);
+            Thread.sleep(secondValue);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+}
+```
+其测试的方法如下：
+```
+    public void testRun() throws Exception {
+        JoinThread joinThread = new JoinThread();
+        joinThread.start();
+        joinThread.join();
+        System.out.println("我想当Join对象执行完毕后我再执行，我做到了");
+
+    }
+```
+结果如下：
+```
+3519
+我想当Join对象执行完毕后我再执行，我做到了
+```
+看上去join方法很神奇，可以实现线程在执行上面的次序。但是实际上join方法内部是通过wait实现的。
+```
+ public final synchronized void join(long millis)
+    throws InterruptedException {
+        long base = System.currentTimeMillis();
+        long now = 0;
+
+        if (millis < 0) {
+            throw new IllegalArgumentException("timeout value is negative");
+        }
+
+        if (millis == 0) {
+            while (isAlive()) {
+                wait(0);
+            }
+        } else {
+            while (isAlive()) {
+                long delay = millis - now;
+                if (delay <= 0) {
+                    break;
+                }
+                wait(delay);
+                now = System.currentTimeMillis() - base;
+            }
+        }
+    }
+```
 
 
 
