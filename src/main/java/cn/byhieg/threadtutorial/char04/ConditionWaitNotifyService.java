@@ -19,7 +19,8 @@ public class ConditionWaitNotifyService {
         try{
             lock.lock();
             System.out.println("await的时间为 " + System.currentTimeMillis());
-            condition.await();
+            condition.awaitUninterruptibly();
+            System.out.println("await结束的时间" + System.currentTimeMillis());
         }catch (Exception e){
             e.printStackTrace();
         }finally {
