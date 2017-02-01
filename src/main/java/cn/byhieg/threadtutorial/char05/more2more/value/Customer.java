@@ -21,7 +21,7 @@ public class Customer {
             System.out.println("消费者 " + Thread.currentThread().getName() + " RUNNING了");
             String value = ValueObject.value;
             ValueObject.value = "";
-            lock.notify();
+            lock.notifyAll();
         }
     }
 }

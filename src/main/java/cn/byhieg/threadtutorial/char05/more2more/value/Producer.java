@@ -21,7 +21,7 @@ public class Producer {
             System.out.println("生产者 " + Thread.currentThread().getName() + " RUNNABLE了");
             String value = System.currentTimeMillis() + "_" + System.nanoTime();
             ValueObject.value = value;
-            lock.notify();
+            lock.notifyAll();
         }
 
     }
