@@ -2,7 +2,6 @@ package cn.byhieg.collectiontutorialtest;
 
 import cn.byhieg.collectiontutorial.listtutorial.ArrayListDemo;
 import junit.framework.TestCase;
-
 import java.util.Iterator;
 
 /**
@@ -17,10 +16,17 @@ public class ArrayListDemoTest extends TestCase {
         for (int i = 0 ;i < 10 ; i++){
             demo.getListA().add(i);
         }
-        Iterator iterator = demo.getListA().iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        Iterator iteratorA = demo.getListA().iterator();
+        while (iteratorA.hasNext()) {
+            System.out.println(iteratorA.next());
         }
+
+        demo.setListC(demo.getListA());
+        Iterator iteratorC = demo.getListC().iterator();
+        while (iteratorC.hasNext()) {
+            System.out.println(iteratorC.next());
+        }
+
     }
 
 }
