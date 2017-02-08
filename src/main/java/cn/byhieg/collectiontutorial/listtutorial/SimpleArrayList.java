@@ -110,8 +110,7 @@ public class SimpleArrayList<E> implements RandomAccess,Cloneable,Serializable{
     public boolean isEmpty(){
         return size() == 0;
     }
-
-
+    
     public E remove(int index) {
         E value = get(index);
         int moveSize = size - index - 1;
