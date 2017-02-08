@@ -26,6 +26,19 @@
 1. 等待/通知机制
 2. join方法的使用
 
+在char04包里放置了Java中Lock类的知识的代码，内容如下：
+
+1. Lock类
+2. Lock类其他功能
+3. Condition类
+4. Condition类其他功能
+5. 读写锁
+
+在char05包里放置了生产者/消费者的知识的代码，内容如下：
+
+1. 一对一 生产者/消费者
+2. 一对多 生产者/消费者
+3. 多对多 生产者/消费者
 
 ## ReflectionTutorial内容说明
 在源码路径下`cn.byhieg.reflectiontutorial`中放置的是Java反射的代码和测试例子，在每一个章的包下，都有一个ReadMe来说明该章的知识点。
@@ -41,6 +54,12 @@ Java通过反射获取如下内容：
 - 泛型
 - 数组
 
+## CollectionTutorial内容说明
+在源码路径下`cn.byhieg.collectiontutorial.listtutorial`中放置的是Java集合类的代码和测试例子。在每一个包里面，都有一个ReadMe来说明该章的知识点。
+listtutorial中的知识点有
+
+- ArrayList的使用
+- 实现一个简单的ArrayList
 
 
 
