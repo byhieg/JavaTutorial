@@ -16,9 +16,10 @@ public class SimpleArrayListTest extends TestCase {
             list.add(i);
         }
 
-        list.add(5,15);
-
-        System.out.println("aaa");
+        list.remove(1);
+        for (int i = 0 ; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
     }
 
 }
