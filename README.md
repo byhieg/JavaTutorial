@@ -62,6 +62,9 @@ listtutorial中的知识点有
 - 实现一个简单的ArrayList
 
 
+## AnnotationTutorial内容说明
+
+在源码路径下`cn.byhieg.annotationtutorial`中放置的是Java注解类的代码和测试例子。在每一个包里面，都有一个ReadMe来说明该章的知识点。
 
 
 
