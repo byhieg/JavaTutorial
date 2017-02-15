@@ -77,6 +77,36 @@ public class SimpleLinkedList<E> {
         }
     }
 
+    public E get(int index) {
+        checkRange(index);
+        return node(index).item;
+    }
+
+    private void checkRange(int index) {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("指定index超过界限");
+        }
+    }
+
+    public int indexOf(Object element) {
+        Node<E> cursor = first;
+        int count = 0;
+        while (cursor != null) {
+            if (element != null) {
+                if (element.equals(cursor.item)) {
+                    return count;
+                }
+            }else{
+                if (cursor.item == null) {
+                    return count;
+                }
+            }
+            count ++;
+            cursor = cursor.next;
+        }
+        return -1;
+    }
+
     private static class Node<E> {
         E item;
         Node<E> next;
