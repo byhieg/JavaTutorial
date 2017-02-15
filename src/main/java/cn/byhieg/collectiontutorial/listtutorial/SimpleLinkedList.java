@@ -15,19 +15,18 @@ public class SimpleLinkedList<E> {
     private Node<E> last;
 
 
-
     public boolean add(E element) {
-       addAtLast(element);
+        addAtLast(element);
         return true;
     }
 
-    private void addAtLast(E element){
+    private void addAtLast(E element) {
         Node<E> l = last;
-        Node<E> node = new Node<E>(element,null,l);
+        Node<E> node = new Node<E>(element, null, l);
         last = node;
         if (l == null) {
             first = node;
-        }else {
+        } else {
             l.next = node;
         }
         size++;
@@ -35,50 +34,50 @@ public class SimpleLinkedList<E> {
 
     public void add(int index, E element) {
         checkRangeForAdd(index);
-        if (index == size){
+        if (index == size) {
             addAtLast(element);
-        }else{
+        } else {
             Node<E> l = node(index);
-            addBeforeNode(element,l);
+            addBeforeNode(element, l);
         }
     }
 
-    private void addBeforeNode(E element,Node<E> specifiedNode){
+    private void addBeforeNode(E element, Node<E> specifiedNode) {
         Node<E> preNode = specifiedNode.prev;
-        Node<E> newNode = new Node<>(element, specifiedNode,preNode);
+        Node<E> newNode = new Node<>(element, specifiedNode, preNode);
         if (preNode == null) {
             first.next = newNode;
-        }else {
+        } else {
             preNode.next = newNode;
         }
         specifiedNode.prev = newNode;
-        size ++;
+        size++;
     }
 
 
-    private Node<E> node(int index){
-        if (index < (size<<1)){
-            Node<E> cursor  = first;
-            for (int i = 0 ; i < index ; i++) {
+    private Node<E> node(int index) {
+        if (index < (size << 1)) {
+            Node<E> cursor = first;
+            for (int i = 0; i < index; i++) {
                 cursor = cursor.next;
             }
             return cursor;
-        }else {
+        } else {
             Node<E> cursor = last;
-            for (int i = size -1 ; i > index ; i--) {
+            for (int i = size - 1; i > index; i--) {
                 cursor = cursor.prev;
             }
             return cursor;
         }
     }
 
-    private void checkRangeForAdd(int index){
+    private void checkRangeForAdd(int index) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("指定的index超过界限");
         }
     }
 
-    private static class Node<E>{
+    private static class Node<E> {
         E item;
         Node<E> next;
         Node<E> prev;
