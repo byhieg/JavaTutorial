@@ -31,4 +31,16 @@ public class SimpleLinkedListTest extends TestCase {
         System.out.println(lists.indexOf(1));
     }
 
+    public void testRemove() throws Exception {
+        SimpleLinkedList<Integer> lists = new SimpleLinkedList<>();
+        lists.add(111);
+        lists.add(1231);
+        lists.add(1513);
+        for (int i = 0 ; i < lists.size();i++) {
+            System.out.println(lists.get(i));
+        }
+
+        lists.remove(1);
+        System.out.println(lists.get(1));
+    }
 }

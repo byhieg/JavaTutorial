@@ -107,6 +107,49 @@ public class SimpleLinkedList<E> {
         return -1;
     }
 
+    public E remove(int index) {
+        checkRange(index);
+        return deleteLink(index);
+    }
+
+    public boolean remove(Object o) {
+        int index = indexOf(o);
+        if (index < 0){
+            return false;
+        }
+        deleteLink(index);
+        return true;
+    }
+
+    private E deleteLink(int index) {
+        Node<E> l = node(index);
+        E item = l.item;
+        Node<E> prevNode = l.prev;
+        Node<E> nextNode = l.next;
+
+        if (prevNode == null) {
+            first = nextNode;
+        }else{
+            prevNode.next = nextNode;
+            l.next = null;
+        }
+
+        if (nextNode == null) {
+            last = prevNode;
+        }else{
+            nextNode.prev = prevNode;
+            l.prev = null;
+        }
+        size--;
+        l.item = null;
+        return item;
+    }
+
+
+
+    public int size(){
+        return size;
+    }
     private static class Node<E> {
         E item;
         Node<E> next;
