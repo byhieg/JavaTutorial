@@ -84,7 +84,7 @@ public class SimpleArrayList<E> implements RandomAccess,Cloneable,Serializable{
     public int indexOf(Object o){
         if (o != null) {
             for (int i = 0 ; i < size ; i++){
-                if (elementData[i].equals(0)){
+                if (o.equals(elementData[i])){
                     return i;
                 }
             }

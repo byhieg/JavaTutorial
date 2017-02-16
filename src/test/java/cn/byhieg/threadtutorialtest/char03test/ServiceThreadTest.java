@@ -13,6 +13,12 @@ public class ServiceThreadTest extends TestCase {
         Object lock = new Object();
         new ServiceThread(lock).start();
         new ServiceThread(lock).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("aaa");
+            }
+        }).start();
 
         Thread.sleep(1000 * 4);
     }
