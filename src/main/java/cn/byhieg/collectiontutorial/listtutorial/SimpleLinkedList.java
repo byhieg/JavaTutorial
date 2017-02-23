@@ -1,7 +1,5 @@
 package cn.byhieg.collectiontutorial.listtutorial;
 
-import apple.laf.JRSUIFocus;
-
 /**
  * Created by byhieg on 17/2/15.
  * Mail to byhieg@gmail.com

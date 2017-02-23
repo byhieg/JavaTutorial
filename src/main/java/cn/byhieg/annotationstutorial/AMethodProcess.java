@@ -1,6 +1,5 @@
 package cn.byhieg.annotationstutorial;
 
-import sun.jvm.hotspot.runtime.amd64.AMD64CurrentFrameGuess;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
