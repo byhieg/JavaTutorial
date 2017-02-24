@@ -1,16 +1,36 @@
 package cn.byhieg.collectiontutorial.maptutorial;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  * Created by shiqifeng on 2017/2/24.
  * Mail byhieg@gmail.com
  */
 public class HashMapExample {
 
-
-    public static void main(String[] args) {
-
-
+    public Map<String, String> insertMap(){
+        HashMap<String, String> maps = new HashMap<>(10);
+        for (int i = 0 ; i < 10 ;i++) {
+            maps.put(i + "", i + "");
+        }
+        return maps;
     }
 
+
+    public void getValue(Map<? extends String,? extends String> maps,String key) {
+        System.out.println(maps.get(key));
+    }
+
+
+    public void getAllKeyAndValue(Map<? extends String, ? extends String> maps) {
+        Iterator iterator = maps.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = (Map.Entry<String, String>) iterator.next();
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+        }
+    }
 
 }
