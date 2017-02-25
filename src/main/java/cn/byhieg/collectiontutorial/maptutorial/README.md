@@ -2,8 +2,8 @@
 
 Map用于保存具有映射关系的数据，Map里保存着两组数据：key和value，它们都可以使任何引用类型的数据，但key不能重复。所以通过指定的key就可以取出对应的value。Map接口定义了如下常用的方法：
 
-1. 1void clear()1:删除Map中所以键值对。
-2. 1boolean containsKey(Object key)1:查询Map中是否包含指定key，如果包含则返回true。
+1. `void clear()`:删除Map中所以键值对。
+2. `boolean containsKey(Object key)`:查询Map中是否包含指定key，如果包含则返回true。
 3. `boolean containsValue(Object value)`:查询Map中是否包含指定value，如果包含则返回true。
 4. `Set entrySet()`:返回Map中所包含的键值对所组成的Set集合，每个集合元素都是Map.Entry对象(Entry是Map的内部类)。
 5. `Object get(Object key)`:返回指定key所对应的value，如Map中不包含key则返回null。
