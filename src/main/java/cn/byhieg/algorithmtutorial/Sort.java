@@ -10,7 +10,7 @@ public class Sort {
      * 选择排序，每一轮排序，选择数组中数字最小的那一个放到指定的位置上。
      * 时间复杂度o(n^2),无论数组顺序如何都要选择一个最小的值，因为数组的是否有序，不影响时间复杂度
      * 空间复杂度o(1)
-     *
+     * 不稳定排序
      * @param nums
      */
     public void chooseSort(int[] nums) {
@@ -33,13 +33,14 @@ public class Sort {
      * 直接插入排序，每一轮排序，都是在i坐标之前，包括i坐标的序列是有序的，但是并不是最终的排序位置。
      * 时间复杂度o（n^2),对于第二重循环，只会在非有序的环境下才会执行每个元素后移，因此针对有序的数组，时间复杂度最好的情况是o(N)。
      * 空间复杂度o(1)
-     *
+     * 稳定排序
      * @param nums
      */
     public void insertDirectlySort(int[] nums) {
         int length = nums.length;
         for (int i = 1; i < length; i++) {
             for (int j = i; j > 0; j--) {
+                //这一步导致该算法是稳定排序
                 if (nums[j] < nums[j - 1]) {
                     int tmp = nums[j - 1];
                     nums[j - 1] = nums[j];
@@ -83,13 +84,14 @@ public class Sort {
      * 这种实现是按照算法定义的，但是效率是最低的
      * 时间复杂度o(n^2)
      * 空间复杂度o(1)
-     *
+     *  稳定排序
      * @param nums
      */
     public void bubbleSort1(int[] nums) {
         int length = nums.length;
         for (int i = 1; i < length; i++) {
             for (int j = 0; j < length - i; j++) {
+                //这一步导致该算法是稳定排序
                 if (nums[j] > nums[j + 1]) {
                     int tmp = nums[j];
                     nums[j] = nums[j + 1];
@@ -126,7 +128,7 @@ public class Sort {
      * 快速排序，选定一个切分元素，每一轮排序后，都保证切分元素之前的元素都小于切分元素，切分元素之后的元素都大于切分元素
      * 时间复杂度o(NlgN)
      * 空间复杂度o(lgN)
-     *
+     * 不稳定排序
      * @param nums
      */
     public void quickSort(int[] nums) {
@@ -192,12 +194,16 @@ public class Sort {
      * 时间复杂度：o(NlgN)
      * 空间复杂度: o(1)
      * 这是小顶堆的排序，所以nums数组最后是降序的
+     * 不稳定，不稳定的原因在建堆的时候，就可能把相同元素的位置换了，比如两个相同元素在不同的子树上
      * @param nums
      */
     public void heapSort(int[] nums) {
         int length = nums.length;
-        for (int i = 0; i < length; i++) {
-            swim(nums, i);
+//        for (int i = 0; i < length; i++) {
+//            swim(nums, i);
+//        }
+        for (int i = length / 2 ; i >= 0;i--) {
+            sink(nums,i,length);
         }
         while (length > 0) {
             int temp = nums[0];
