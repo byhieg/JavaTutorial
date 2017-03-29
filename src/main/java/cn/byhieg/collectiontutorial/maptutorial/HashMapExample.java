@@ -1,8 +1,6 @@
 package cn.byhieg.collectiontutorial.maptutorial;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by shiqifeng on 2017/2/24.
