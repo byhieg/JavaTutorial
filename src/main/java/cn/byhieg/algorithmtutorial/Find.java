@@ -14,12 +14,12 @@ public class Find {
      * @param nums int型数组，要求有序
      * @return 找到，返回下标，没找到，返回-1
      */
-    public int binarySerachFind(int[] nums,int des) {
+    public int binarySearchFind(int[] nums,int des) {
         int length = nums.length;
         int low = 0;
         int high = length - 1;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
+        while (low <= high) {
+            int mid = (low + high) / 2;
             if (nums[mid] == des) {
                 return mid;
             } else if (nums[mid] < des) {

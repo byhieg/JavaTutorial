@@ -1,7 +1,6 @@
 package cn.byhieg.collectiontutorialtest;
 
 import cn.byhieg.algorithmtutorial.BinarySearchTree;
-import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import junit.framework.TestCase;
 import org.junit.Assert;
 
@@ -10,11 +9,12 @@ import org.junit.Assert;
  * Mail to byhieg@gmail.com
  */
 public class BinarySearchTreeTest extends TestCase {
-    int [] nums;
+    int[] nums;
     BinarySearchTree tree;
+
     public void setUp() throws Exception {
         super.setUp();
-        nums = new int[]{10,6,2,8,7,3,4,1};
+        nums = new int[]{10, 6, 2, 8, 7, 3, 4, 1};
         tree = new BinarySearchTree(nums);
     }
 
@@ -43,11 +43,18 @@ public class BinarySearchTreeTest extends TestCase {
         System.out.println();
     }
 
+    public void testGetTree() throws Exception {
+        System.out.println("树");
+        int[] pre = new int[]{10, 6, 2, 1, 3, 4, 8, 7};
+        int[] in = new int[]{1, 2, 3, 4, 6, 7, 8, 10};
+        tree.getTree(pre, in,true);
+    }
+
     public void testGetMaxData() throws Exception {
-//        Assert.assertEquals(12,tree.getMaxNode().data);
+        Assert.assertEquals(10,tree.getMaxNode().data);
     }
 
     public void testGetMinData() throws Exception {
-//        Assert.assertEquals(1,tree.getMinNode().data);
+        Assert.assertEquals(1,tree.getMinNode().data);
     }
 }

@@ -17,14 +17,14 @@ public class BinarySearchTree {
     private Node root;
 
 
-    public BinarySearchTree(){
+    public BinarySearchTree() {
 
     }
 
 
     public BinarySearchTree(int[] nums) {
         Node[] nodes = new Node[nums.length];
-        for (int i = 0 ; i < nums.length;i++) {
+        for (int i = 0; i < nums.length; i++) {
             nodes[i] = new Node(nums[i]);
             insert(nodes[i]);
         }
@@ -32,10 +32,11 @@ public class BinarySearchTree {
 
     /**
      * 查找指定的元素
+     *
      * @param des
      * @return
      */
-    public Node find(int des){
+    public Node find(int des) {
         if (root == null) {
             System.out.println("树是空的");
             throw new RuntimeException();
@@ -44,7 +45,7 @@ public class BinarySearchTree {
         while (current.data != des) {
             if (current.data < des) {
                 current = current.right;
-            }else{
+            } else {
                 current = current.left;
             }
             if (current == null) return null;
@@ -55,10 +56,11 @@ public class BinarySearchTree {
     /**
      * 对BST执行插入操作，采用非递归的形式
      * 保证插入后，左节点的值小于根节点的值，根节点的值小于右节点的值
+     *
      * @param node
      * @return
      */
-    public boolean insert(Node node){
+    public boolean insert(Node node) {
         if (root == null) {
             root = node;
             return true;
@@ -77,7 +79,7 @@ public class BinarySearchTree {
                     return true;
                 }
                 current = current.right;
-            }else{
+            } else {
                 if (current.left == null) {
                     current.left = node;
                     return true;
@@ -105,9 +107,10 @@ public class BinarySearchTree {
     /**
      * 树的中序遍历，递归实现
      * 针对BST，该结果会从小到大输出树
+     *
      * @param node
      */
-    public void inOrder(Node node){
+    public void inOrder(Node node) {
         if (node.left != null) {
             inOrder(node.left);
         }
@@ -120,7 +123,7 @@ public class BinarySearchTree {
     /**
      * 树的后续遍历，递归实现
      */
-    public void postOrder(Node node){
+    public void postOrder(Node node) {
         if (node.left != null) {
             postOrder(node.left);
         }
@@ -136,7 +139,6 @@ public class BinarySearchTree {
      * 1. 建立一个栈，现将头结点压入栈中。
      * 2. 现将每出栈一个节点，打印他的值，然后都要先加入他的右节点，在加入他的左节点。因为栈的后进先出的特性，才能让左边先出。
      * 3. 不断重复2，直到栈空
-     *
      */
     public void preOrder2(Node node) {
         if (node != null) {
@@ -161,7 +163,7 @@ public class BinarySearchTree {
      * 2. 出栈一个节点，打印他的值，然后cur = node.right,并不断重复第二步
      * 3. 当栈为空，并且cur为空时，停止
      */
-    public void inorder2(Node node){
+    public void inorder2(Node node) {
         if (node != null) {
             Stack<Node> stack = new Stack<>();
             Node cur = node;
@@ -170,7 +172,7 @@ public class BinarySearchTree {
                     cur = stack.pop();
                     System.out.print(cur.data + "-->");
                     cur = cur.right;
-                }else{
+                } else {
                     stack.push(cur);
                     cur = cur.left;
                 }
@@ -183,6 +185,7 @@ public class BinarySearchTree {
      * 1. 树的先续遍历中，是栈存放顺序是根，右节点，左节点。
      * 2. 我们可以将其反过来，用栈存放是根，左节点，右节点。然后出栈的时候，将出栈的结果存放到另一个栈里。
      * 3. 第二栈里的顺序从上到下就是左节点，右节点，根的顺序。
+     *
      * @param node
      */
 
@@ -192,7 +195,7 @@ public class BinarySearchTree {
             Stack<Node> result = new Stack<>();
             Node cur = node;
             stack.push(cur);
-            while (!stack.isEmpty()){
+            while (!stack.isEmpty()) {
                 Node tmp = stack.pop();
                 result.push(tmp);
                 if (tmp.left != null) {
@@ -212,9 +215,10 @@ public class BinarySearchTree {
 
     /**
      * 得到树中最小的节点
+     *
      * @return
      */
-    public Node getMinNode(){
+    public Node getMinNode() {
         if (root == null) {
             throw new RuntimeException("树为空");
         }
@@ -228,9 +232,10 @@ public class BinarySearchTree {
 
     /**
      * 得到树中最大的节点
+     *
      * @return
      */
-    public Node getMaxNode(){
+    public Node getMaxNode() {
         if (root == null) {
             throw new RuntimeException("树为空");
         }
@@ -242,12 +247,51 @@ public class BinarySearchTree {
         return current;
     }
 
-    public static class Node{
+
+    public void getTree(int[] preOrders, int[] inOrders,boolean isLeft) {
+        int root = preOrders[0];
+        if (isLeft) {
+            System.out.println("左" + root);
+        }else{
+            System.out.println("右" + root);
+        }
+
+        int index = new Find().binarySearchFind(inOrders, root);
+        int[] left = new int[index];
+        int[] preLeft = new int[index];
+        if (left.length != 0) {
+            for (int i = 0; i < index; i++) {
+                left[i] = inOrders[i];
+                preLeft[i] = preOrders[i + 1];
+            }
+        }
+        int size = inOrders.length - index - 1;
+        int[] right = new int[inOrders.length - index - 1];
+        int[] preRight = new int[size];
+        if (right.length != 0) {
+            for (int i = 0; i < size; i++) {
+                right[i] = inOrders[i + index + 1];
+                preRight[i] = preOrders[preLeft.length + i + 1];
+            }
+        }
+
+        if (preLeft.length != 0) {
+            getTree(preLeft, left,true);
+        }
+
+        if (preRight.length != 0) {
+            getTree(preRight, right,false);
+        }
+        System.out.println();
+
+    }
+
+    public static class Node {
         public int data;
         public Node left;
         public Node right;
 
-        public Node(int data){
+        public Node(int data) {
             this.data = data;
         }
     }
