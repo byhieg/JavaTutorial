@@ -156,6 +156,8 @@ public class BinarySearchTree {
                     stack.push(tmp.left);
                 }
             }
+            System.out.println("结束");
+
         }
     }
 
@@ -179,6 +181,8 @@ public class BinarySearchTree {
                     cur = cur.left;
                 }
             }
+            System.out.println("结束");
+
         }
     }
 
@@ -211,6 +215,8 @@ public class BinarySearchTree {
             while (!result.isEmpty()) {
                 System.out.print(result.pop().data + "-->");
             }
+            System.out.println("结束");
+
         }
     }
 
@@ -232,7 +238,11 @@ public class BinarySearchTree {
                 queue.offer(current.right);
             }
         }
+        System.out.println("结束");
+
     }
+
+
 
 
     /**
@@ -270,14 +280,16 @@ public class BinarySearchTree {
     }
 
 
+    /**
+     * 从先序遍历和中序遍历中构造出树
+     * @param preOrders
+     * @param inOrders
+     * @param r
+     */
     public void getTree(int[] preOrders, int[] inOrders,Node r) {
         int root = preOrders[0];
-//        if (isLeft) {
-//            System.out.println("左" + root);
-//        }else{
-//            System.out.println("右" + root);
-//        }
         r.data = root;
+
         int index = findIndex(inOrders, root);
         int[] left = new int[index];
         int[] preLeft = new int[index];
