@@ -250,7 +250,8 @@ public class Sort {
                 nums[i] = nums[son];
                 nums[son] = temp;
                 i = son;
-            } else {
+                son = 2 * i + 1;
+            }else{
                 break;
             }
         }

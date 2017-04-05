@@ -5,6 +5,8 @@ package cn.byhieg.algorithmtutorial;
  * Mail to byhieg@gmail.com
  */
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -212,6 +214,26 @@ public class BinarySearchTree {
         }
     }
 
+    /**
+     * 树的层次遍历，类似于图的BFS
+     * @param root
+     */
+    public void levelRead(Node root) {
+        if (root == null) return;
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            System.out.print(current.data + "-->");
+            if (current.left != null) {
+                queue.offer(current.left);
+            }
+            if (current.right != null) {
+                queue.offer(current.right);
+            }
+        }
+    }
+
 
     /**
      * 得到树中最小的节点
@@ -248,15 +270,15 @@ public class BinarySearchTree {
     }
 
 
-    public void getTree(int[] preOrders, int[] inOrders,boolean isLeft) {
+    public void getTree(int[] preOrders, int[] inOrders,Node r) {
         int root = preOrders[0];
-        if (isLeft) {
-            System.out.println("左" + root);
-        }else{
-            System.out.println("右" + root);
-        }
-
-        int index = new Find().binarySearchFind(inOrders, root);
+//        if (isLeft) {
+//            System.out.println("左" + root);
+//        }else{
+//            System.out.println("右" + root);
+//        }
+        r.data = root;
+        int index = findIndex(inOrders, root);
         int[] left = new int[index];
         int[] preLeft = new int[index];
         if (left.length != 0) {
@@ -264,7 +286,11 @@ public class BinarySearchTree {
                 left[i] = inOrders[i];
                 preLeft[i] = preOrders[i + 1];
             }
+            Node node = new Node(preLeft[0]);
+            r.left = node;
         }
+
+
         int size = inOrders.length - index - 1;
         int[] right = new int[inOrders.length - index - 1];
         int[] preRight = new int[size];
@@ -273,17 +299,17 @@ public class BinarySearchTree {
                 right[i] = inOrders[i + index + 1];
                 preRight[i] = preOrders[preLeft.length + i + 1];
             }
+            Node node = new Node(preRight[0]);
+            r.right = node;
         }
 
         if (preLeft.length != 0) {
-            getTree(preLeft, left,true);
+            getTree(preLeft, left,r.left);
         }
 
         if (preRight.length != 0) {
-            getTree(preRight, right,false);
+            getTree(preRight, right,r.right);
         }
-        System.out.println();
-
     }
 
     public static class Node {
@@ -298,5 +324,14 @@ public class BinarySearchTree {
 
     public Node getRoot() {
         return root;
+    }
+
+    private int findIndex(int[] nums, int target) {
+        for (int i = 0 ; i < nums.length;i++) {
+            if (nums[i] == target) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

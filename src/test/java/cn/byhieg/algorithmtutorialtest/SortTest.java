@@ -19,27 +19,27 @@ public class SortTest extends TestCase {
             System.out.print(nums[i] + " ");
         }
     }
-
-    public void testChooseSort() throws Exception {
-       new Sort().chooseSort(nums);
-    }
-
-
-    public void testInsertDirectlySort() throws Exception {
-        new Sort().insertDirectlySort(nums);
-    }
-
-    public void testInsertBinarySort() throws Exception {
-        new Sort().insertBinarySort(nums);
-    }
-
-    public void testBubbleSort() throws Exception {
-        new Sort().bubbleSort2(nums);
-    }
-
-    public void testQuickSort() throws Exception {
-        new Sort().quickSort(nums);
-    }
+//
+//    public void testChooseSort() throws Exception {
+//       new Sort().chooseSort(nums);
+//    }
+//
+//
+//    public void testInsertDirectlySort() throws Exception {
+//        new Sort().insertDirectlySort(nums);
+//    }
+//
+//    public void testInsertBinarySort() throws Exception {
+//        new Sort().insertBinarySort(nums);
+//    }
+//
+//    public void testBubbleSort() throws Exception {
+//        new Sort().bubbleSort2(nums);
+//    }
+//
+//    public void testQuickSort() throws Exception {
+//        new Sort().quickSort(nums);
+//    }
 
     public void testHeapSort() throws Exception {
         new Sort().heapSort(nums);
