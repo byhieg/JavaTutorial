@@ -12,23 +12,23 @@ public class FindTest extends TestCase {
     int result;
     public void setUp() throws Exception {
         super.setUp();
-        nums = new int[]{1};
+        nums = new int[]{};
     }
 
     public void tearDown() throws Exception {
         System.out.println(result);
     }
 
-//    public void testBinarySerachFind() throws Exception {
-//        result = new Find().binarySerachFind(nums,6);
-//    }
-////
+    public void testBinarySerachFind() throws Exception {
+        result = new Find().binarySearchFind(nums,2);
+    }
+
 //    public void testBinarySearchMinFind() throws Exception {
 //        result = new Find().binarySearchMinFind(nums,1);
 //    }
 
-    public void testBinarySearchMaxFind() throws Exception {
-        result = new Find().binarySearchMaxFind(nums, 2);
-    }
+//    public void testBinarySearchMaxFind() throws Exception {
+//        result = new Find().binarySearchMaxFind(nums, 2);
+//    }
 
 }

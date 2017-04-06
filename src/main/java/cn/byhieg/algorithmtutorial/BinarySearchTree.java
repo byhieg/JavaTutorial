@@ -5,21 +5,14 @@ package cn.byhieg.algorithmtutorial;
  * Mail to byhieg@gmail.com
  */
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
  * 该类是二叉搜索树
  * 该树在实现的时候，不考虑数组中有重复的数字。
  * 节点的左子节点的值都小于这个节点的值，节点的右子节点的值都大于等于这个节点的值
- * 该树并不是平衡二叉树，也就是说左右子树的树高可以存在很大的差距，这就导致了在极端情况下，存在只有左边的树，这样的查找时间复杂度就是o(N)
- * 平均情况下 时间复杂度是o(lgN)
- *
- * 可以考虑是用平衡二叉树，保持了树的左右高度 不会超过1，但是带来的插入和删除的额外开销，因为每次插入删除，都需要调整平衡
- * 但他的查找的时间复杂度是o(lgN)
- *
- * 二叉搜索树(BST)相比二分查找的优势，在于他不需要基于有序的数组，并且插入和删除的操作显然比二分查找的数组有快的多，
- * 但是时间复杂度没有二分查找稳定
- * 相比二叉平衡搜索树(AVL)而言，虽然多了插入和删除的优势，但是没有AVL稳定
  */
 public class BinarySearchTree {
 
@@ -163,6 +156,8 @@ public class BinarySearchTree {
                     stack.push(tmp.left);
                 }
             }
+            System.out.println("结束");
+
         }
     }
 
@@ -186,6 +181,8 @@ public class BinarySearchTree {
                     cur = cur.left;
                 }
             }
+            System.out.println("结束");
+
         }
     }
 
@@ -218,8 +215,34 @@ public class BinarySearchTree {
             while (!result.isEmpty()) {
                 System.out.print(result.pop().data + "-->");
             }
+            System.out.println("结束");
+
         }
     }
+
+    /**
+     * 树的层次遍历，类似于图的BFS
+     * @param root
+     */
+    public void levelRead(Node root) {
+        if (root == null) return;
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            System.out.print(current.data + "-->");
+            if (current.left != null) {
+                queue.offer(current.left);
+            }
+            if (current.right != null) {
+                queue.offer(current.right);
+            }
+        }
+        System.out.println("结束");
+
+    }
+
+
 
 
     /**
@@ -258,20 +281,16 @@ public class BinarySearchTree {
 
 
     /**
-     * 通过先序遍历和中序遍历恢复一棵树
+     * 从先序遍历和中序遍历中构造出树
      * @param preOrders
      * @param inOrders
-     * @param isLeft
+     * @param r
      */
-    public void getTree(int[] preOrders, int[] inOrders,boolean isLeft) {
+    public void getTree(int[] preOrders, int[] inOrders,Node r) {
         int root = preOrders[0];
-        if (isLeft) {
-            System.out.println("左" + root);
-        }else{
-            System.out.println("右" + root);
-        }
+        r.data = root;
 
-        int index = new Find().binarySearchFind(inOrders, root);
+        int index = findIndex(inOrders, root);
         int[] left = new int[index];
         int[] preLeft = new int[index];
         if (left.length != 0) {
@@ -279,7 +298,11 @@ public class BinarySearchTree {
                 left[i] = inOrders[i];
                 preLeft[i] = preOrders[i + 1];
             }
+            Node node = new Node(preLeft[0]);
+            r.left = node;
         }
+
+
         int size = inOrders.length - index - 1;
         int[] right = new int[inOrders.length - index - 1];
         int[] preRight = new int[size];
@@ -288,17 +311,17 @@ public class BinarySearchTree {
                 right[i] = inOrders[i + index + 1];
                 preRight[i] = preOrders[preLeft.length + i + 1];
             }
+            Node node = new Node(preRight[0]);
+            r.right = node;
         }
 
         if (preLeft.length != 0) {
-            getTree(preLeft, left,true);
+            getTree(preLeft, left,r.left);
         }
 
         if (preRight.length != 0) {
-            getTree(preRight, right,false);
+            getTree(preRight, right,r.right);
         }
-        System.out.println();
-
     }
 
     public static class Node {
@@ -313,5 +336,14 @@ public class BinarySearchTree {
 
     public Node getRoot() {
         return root;
+    }
+
+    private int findIndex(int[] nums, int target) {
+        for (int i = 0 ; i < nums.length;i++) {
+            if (nums[i] == target) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
