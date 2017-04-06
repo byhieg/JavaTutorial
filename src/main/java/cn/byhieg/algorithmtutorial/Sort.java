@@ -241,7 +241,7 @@ public class Sort {
      * @param nums nums[] 数组
      * @param i    i节点
      */
-    public void sink(int nums[], int i,int n) {
+    public void sink(int [] nums, int i,int n) {
         int son = 2 * i + 1;
         while (son <= n - 1) {
             if (son < n - 1 && nums[son] > nums[son + 1]) son++;

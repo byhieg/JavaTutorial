@@ -11,6 +11,15 @@ import java.util.Stack;
  * 该类是二叉搜索树
  * 该树在实现的时候，不考虑数组中有重复的数字。
  * 节点的左子节点的值都小于这个节点的值，节点的右子节点的值都大于等于这个节点的值
+ * 该树并不是平衡二叉树，也就是说左右子树的树高可以存在很大的差距，这就导致了在极端情况下，存在只有左边的树，这样的查找时间复杂度就是o(N)
+ * 平均情况下 时间复杂度是o(lgN)
+ *
+ * 可以考虑是用平衡二叉树，保持了树的左右高度 不会超过1，但是带来的插入和删除的额外开销，因为每次插入删除，都需要调整平衡
+ * 但他的查找的时间复杂度是o(lgN)
+ *
+ * 二叉搜索树(BST)相比二分查找的优势，在于他不需要基于有序的数组，并且插入和删除的操作显然比二分查找的数组有快的多，
+ * 但是时间复杂度没有二分查找稳定
+ * 相比二叉平衡搜索树(AVL)而言，虽然多了插入和删除的优势，但是没有AVL稳定
  */
 public class BinarySearchTree {
 
@@ -248,6 +257,12 @@ public class BinarySearchTree {
     }
 
 
+    /**
+     * 通过先序遍历和中序遍历恢复一棵树
+     * @param preOrders
+     * @param inOrders
+     * @param isLeft
+     */
     public void getTree(int[] preOrders, int[] inOrders,boolean isLeft) {
         int root = preOrders[0];
         if (isLeft) {
