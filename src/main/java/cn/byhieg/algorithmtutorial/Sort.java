@@ -1,5 +1,9 @@
 package cn.byhieg.algorithmtutorial;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * Created by shiqifeng on 2017/3/28.
  * Mail byhieg@gmail.com
@@ -202,6 +206,7 @@ public class Sort {
 //        for (int i = 0; i < length; i++) {
 //            swim(nums, i);
 //        }
+        //只能从前一半开始sink
         for (int i = length / 2 ; i >= 0;i--) {
             sink(nums,i,length);
         }

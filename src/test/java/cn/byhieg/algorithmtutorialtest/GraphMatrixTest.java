@@ -50,7 +50,7 @@ public class GraphMatrixTest extends TestCase {
     }
 
     public void testDijkstra() throws Exception {
-        graphMatrix.dijkstra(0);
+        graphMatrix.dijkstra(1,2);
     }
 
 }
