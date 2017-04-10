@@ -165,14 +165,14 @@ public class Sort {
         int x = nums[i];
         while (i < j) {
             //从右向左找到nums[j]小于x的元素
-            while (i < j && nums[j] > x) j--;
+            while (i < j && nums[j] >= x) j--;
             if (i < j) {
                 nums[i] = nums[j];
                 i++;
             }
 
             //从左向右找到nums[i]大于x的元素
-            while (i < j && nums[i] < x) i++;
+            while (i < j && nums[i] <= x) i++;
             if (i < j) {
                 nums[j] = nums[i];
                 j--;
