@@ -1,7 +1,6 @@
 package cn.byhieg.algorithmtutorialtest;
 
 import cn.byhieg.algorithmtutorial.BinaryTree;
-import cn.byhieg.iotutorial.bytestreamio.BufferdInputStreamExample;
 import junit.framework.TestCase;
 
 /**
@@ -9,7 +8,6 @@ import junit.framework.TestCase;
  * Mail to byhieg@gmail.com
  */
 public class BinaryTreeTest extends TestCase {
-
 
     BinaryTree.Node root = new BinaryTree.Node(1);
     public void setUp() throws Exception {
@@ -69,11 +67,22 @@ public class BinaryTreeTest extends TestCase {
     }
 
     public void testGetNodes() throws Exception {
-        System.out.println("节点数" + BinaryTree.getNodes(root));
+        System.out.print("节点数" + BinaryTree.getNodes(root));
     }
 
     public void testGetLeafs() throws Exception {
-        System.out.println("叶子数" + BinaryTree.getLeafs(root));
+        System.out.print("叶子数" + BinaryTree.getLeafs(root));
     }
 
+    public void testGetHeight() throws Exception {
+        System.out.print("树的高度" + BinaryTree.getHeight(root));
+    }
+
+    public void testCalcKNodes() throws Exception {
+        System.out.print("第2层的节点数" + BinaryTree.calcKNodes(root,2));
+    }
+
+    public void testMirror() throws Exception {
+        BinaryTree.mirror(root);
+    }
 }

@@ -162,6 +162,11 @@ public class BinaryTree {
         return getNodes(root.left) + getNodes(root.right) + 1;
     }
 
+    /**
+     * 得到树的叶子节点的数目
+     * @param root
+     * @return
+     */
     public static int getLeafs(Node root) {
         if (root == null) {
             return 0;
@@ -171,6 +176,70 @@ public class BinaryTree {
         }
         return getLeafs(root.left) + getLeafs(root.right);
 
+    }
+
+
+    /**
+     * 计算树的深度
+     * @param root
+     * @return
+     */
+    public static int getHeight(Node root){
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = getHeight(root.left) + 1;
+        int rightHeight = getHeight(root.right) + 1;
+        return leftHeight > rightHeight ? leftHeight : rightHeight;
+    }
+
+    /**
+     * 计算第K层的节点数
+     * @param root
+     * @param k
+     * @return
+     */
+    public static int calcKNodes(Node root, int k) {
+        if (root == null || k < 0) {
+            return 0;
+        }
+        if (k == 0){
+            return 1;
+        }
+        return calcKNodes(root.left, k - 1) + calcKNodes(root.right, k - 1);
+
+    }
+
+    /**
+     * 判断两个树的结构是否相同
+     * @param root1
+     * @param root2
+     * @return
+     */
+    public static boolean isCommon(Node root1, Node root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        } else if (root1 == null || root2 == null) {
+            return false;
+        }else{
+            boolean isLeftCommon = isCommon(root1.left, root2.left);
+            boolean isRightCommon = isCommon(root1.right, root2.right);
+            return isLeftCommon && isRightCommon;
+        }
+    }
+
+    /**
+     * 得到树的镜像，即对于每一个节点，交换他们的左右孩子节点。
+     * @param root
+     */
+    public static void mirror(Node root) {
+        if (root != null) {
+            Node tmp = root.left;
+            root.left = root.right;
+            root.right = tmp;
+            mirror(root.left);
+            mirror(root.right);
+        }
     }
 
     public static class Node {
