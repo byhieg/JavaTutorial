@@ -242,6 +242,32 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * 得到两个节点的最近公共祖先节点。
+     * 递归左右子树，如果返回的值都不为空，则表示在左右子树各找到一个target，因为最近的祖先就是cur
+     * 如果有一个为空，则就不为空就是最近公共祖先。
+     * @param root
+     * @param target1
+     * @param target2
+     * @return
+     */
+    public static Node findLCA(Node root, Node target1, Node target2) {
+        if (root == null)
+            return null;
+
+        if (root == target1 || root == target2) {
+            return root;
+        }
+        Node left = findLCA(root.left, target1, target2);
+        Node right = findLCA(root.right, target1, target2);
+        if (left != null && right != null) {
+            return root;
+        }
+        return left != null ? left:right;
+    }
+
+
+
     public static class Node {
         public int data;
         public Node left;
@@ -254,4 +280,6 @@ public class BinaryTree {
             right = null;
         }
     }
+
+
 }
