@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shiqifeng on 2017/4/10.
@@ -14,22 +16,38 @@ import java.nio.channels.FileChannel;
 public class NioTest {
 
     public static void main(String[] args) throws IOException {
-        String s = File.separator;
-        RandomAccessFile aFile = new RandomAccessFile("D:" + s + "read_file.txt","rw");
-        FileChannel inChannel = aFile.getChannel();
-
-        ByteBuffer buf = ByteBuffer.allocate(48);
-        int bytesRead = inChannel.read(buf);
-        while (bytesRead != -1) {
-            buf.flip();
-            while (buf.hasRemaining()) {
-                System.out.print((char) buf.get());
+        for (int i = 2; i <= 100; i++) {
+            if(i == 2 || i == 5 || i == 7 || i == 3){
+                System.out.print(i + " ");
+                continue;
+            }
+            if (i % 2 == 0 || i % 3 == 0 || i % 5 == 0 || i % 7 == 0) {
+                continue;
             }
 
-            buf.clear();
-            bytesRead = inChannel.read(buf);
+            System.out.print(i + " ");
         }
-
-        aFile.close();
+        System.out.println();
+        for (int i = 2 ; i <= 100;i++){
+            if (isPrime(i)){
+                System.out.print(i + " ");
+            }
+        }
     }
+
+
+    public static boolean isPrime(int n){
+        if(n < 2){
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n);i++){
+            if (n % i == 0){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+
 }
