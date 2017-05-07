@@ -1,9 +1,6 @@
 package cn.byhieg.threadtutorial.concurrent.atom;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicIntegerArray;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.*;
 
 /**
  * Created by shiqifeng on 2017/5/5.
@@ -30,7 +27,10 @@ public class AtomFactory {
     }
 
     public AtomicReference<MyObject> createAtomReference(MyObject object){
-        AtomicReference<MyObject> objectAtomicReference = new AtomicReference<>();
-        return objectAtomicReference;
+        return new AtomicReference<>();
+    }
+
+    public AtomicIntegerFieldUpdater<MyObject> createAtomIntegerUpdate(String fieldName) {
+        return  AtomicIntegerFieldUpdater.newUpdater(MyObject.class, fieldName);
     }
 }

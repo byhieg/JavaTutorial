@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
+import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -17,6 +18,7 @@ public class AtomFactoryTest extends TestCase {
     AtomicInteger integer;
     AtomicIntegerArray array;
     AtomicReference<MyObject> reference;
+    AtomicIntegerFieldUpdater<MyObject> updater;
 
     public void setUp() throws Exception {
         super.setUp();
@@ -24,6 +26,7 @@ public class AtomFactoryTest extends TestCase {
     }
 
     public void testAtomInt() throws Exception {
+        System.out.println("int原子类");
         new Thread(()->{
             for (int i = 0; i < 10; i++) {
                 integer.getAndIncrement();
@@ -42,6 +45,7 @@ public class AtomFactoryTest extends TestCase {
     }
 
     public void testAtomArray() throws Exception {
+        System.out.println("原子类数组");
         int [] value = new int[]{1,2,3,4};
         array = AtomFactory.getInstance().createAtomArray(value);
         array.getAndSet(1,10);
@@ -50,6 +54,7 @@ public class AtomFactoryTest extends TestCase {
     }
 
     public void testAtomRef()throws Exception {
+        System.out.println("原子类");
         MyObject object = new MyObject();
         reference = AtomFactory.getInstance().createAtomReference(object);
         reference.set(object);
@@ -57,7 +62,15 @@ public class AtomFactoryTest extends TestCase {
         newObject.name = "xiaoli";
         reference.compareAndSet(object, newObject);
         System.out.println(reference.get().name);
+    }
 
+
+    public void testUpdater() throws Exception {
+        System.out.println("原子类更新字段");
+        updater = AtomFactory.getInstance().createAtomIntegerUpdate("id");
+        MyObject object = new MyObject();
+        System.out.println(updater.getAndIncrement(object));
+        System.out.println(updater.get(object));
     }
 
 
