@@ -20,7 +20,7 @@ public class Costumer extends Thread{
         super.run();
         while (true) {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(5000);
                 String str = blockingQueue.take();
                 System.out.println(getName() + " 取出数据 " + str);
             } catch (InterruptedException e) {

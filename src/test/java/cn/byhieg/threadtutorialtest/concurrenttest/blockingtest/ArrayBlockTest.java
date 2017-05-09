@@ -15,7 +15,7 @@ public class ArrayBlockTest extends TestCase {
     ArrayBlock block;
     public void setUp() throws Exception {
         super.setUp();
-        block = new ArrayBlock();
+        block = new ArrayBlock(2);
     }
 
     public void tearDown() throws Exception {

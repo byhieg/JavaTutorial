@@ -14,9 +14,8 @@ public class Producer extends Thread {
         super.run();
         for (int i = 0 ; i < 5;i++) {
             try {
-                System.out.println(getName() + " 生产数据");
                 blockingQueue.put(i + "");
-                Thread.sleep(1000);
+                System.out.println(getName() + " 生产数据");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
