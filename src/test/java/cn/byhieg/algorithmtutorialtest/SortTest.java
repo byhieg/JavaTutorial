@@ -41,8 +41,13 @@ public class SortTest extends TestCase {
 //        new Sort().quickSort(nums);
 //    }
 
-    public void testHeapSort() throws Exception {
-        new Sort().heapSort(nums);
+//    public void testHeapSort() throws Exception {
+//        new Sort().heapSort(nums);
+//    }
+
+    public void testMergeSort() throws Exception {
+        new Sort().mergeSort(nums);
+
     }
 
 }

@@ -129,6 +129,59 @@ public class Sort {
     }
 
     /**
+     * 归并排序，将数组一分为二，对于每一子数组继续进行上述步骤，直到子数组只有1个元素，那么自然是有序的。
+     * 然后不断合并两个数组，直到合并到整个数组。
+     * 时间复杂度o(NlgN)
+     * 空间复杂度o(N)
+     * @param nums
+     */
+    public void mergeSort(int[] nums) {
+        int length = nums.length;
+        int low = 0;
+        int high = length - 1;
+        realSort(nums, low, high);
+    }
+
+    /**
+     * 归并排序真正的sort函数
+     * @param nums 待排序的数组
+     * @param low 最低位
+     * @param high 最高位
+     */
+    private void realSort(int[] nums, int low, int high) {
+        int mid = (low + high) / 2;
+        if (low < high) {
+            realSort(nums, low, mid);
+            realSort(nums, mid + 1, high);
+            realMerge(nums, low, mid, high);
+        }
+    }
+
+    private void realMerge(int[] nums, int low, int mid, int high) {
+        int[] tmpNums = new int[high - low + 1];
+        int leftPoint = low;
+        int rightPoint = mid + 1;
+        int index = 0;
+
+        while (leftPoint <= mid && rightPoint <= high) {
+            if (nums[leftPoint] < nums[rightPoint]) {
+                tmpNums[index++] = nums[leftPoint++];
+            }else{
+                tmpNums[index++] = nums[rightPoint++];
+            }
+        }
+
+        while (leftPoint <= mid) {
+            tmpNums[index++] = nums[leftPoint++];
+        }
+        while (rightPoint <= high) {
+            tmpNums[index++] = nums[rightPoint++];
+        }
+
+        System.arraycopy(tmpNums, 0, nums, low, tmpNums.length);
+    }
+
+    /**
      * 快速排序，选定一个切分元素，每一轮排序后，都保证切分元素之前的元素都小于切分元素，切分元素之后的元素都大于切分元素
      * 时间复杂度o(NlgN)
      * 空间复杂度o(lgN)
@@ -261,6 +314,7 @@ public class Sort {
             }
         }
     }
+
 
 
 }
