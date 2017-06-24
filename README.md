@@ -1,7 +1,8 @@
 # JavaTutorial内容说明
 该Java教程是学习Java过程中对Java知识点进行梳理。每一个包中的代码都有一个ReadMe来说明该包代码的作用以及知识点。
+src包里面是Java的源码，test包里面是针对源码的测试
 
-![Alt text](images/JavaTutorial目录.jpg)
+![Alt text](images/JavaTutorial目录.png)
 
 ## ThreadTutorial内容说明
 在源码路径下`cn.byhieg.threadtutorial`中放置的是Java多线程的代码和测试例子，在每一个章的包下，都有一个ReadMe来说明该章的知识点。
@@ -67,9 +68,6 @@ MapTutorial中的知识点有
 - TreeMap的使用
 - LinkedHashMap的使用
 
-
-
-
 ## AnnotationTutorial内容说明
 
 在源码路径下`cn.byhieg.annotationtutorial`中放置的是Java注解类的代码和测试例子。在每一个包里面，都有一个ReadMe来说明该章的知识点。
@@ -79,7 +77,22 @@ MapTutorial中的知识点有
 
 在源码路径下`cn.byhieg.iotutorial`中放置的是Java io类的代码和测试例子。在每一个包里面，都有一个ReadMe来说明该章的知识点。
 
+## DesignPattern内容说明
 
+在源码路径下`cn.byhieg.designpatterntutorial`中放置的是Java 设计模式的代码和测试的例子。目前有
 
+- 代理模式
+- 单例模式
+- builder模式
 
+## algorithmtutorial内容说明
+
+在源码路径下`cn.byhieg.algorithmtutorial`中放置的是Java实现的一些算法，内容如下：
+
+- 二叉搜索树
+- 二叉树的常见的算法
+- 查找算法，
+- 图的算法(DFS,BFS，Dijkstra)
+- 单链表的算法
+- 排序算法。
 
