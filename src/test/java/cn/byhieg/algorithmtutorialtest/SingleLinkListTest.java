@@ -43,6 +43,7 @@ public class SingleLinkListTest extends TestCase {
 //        System.out.println("头插入");
     }
     public void testReverseLinkList() throws Exception {
+        System.out.println();
         linkList.insertFromHead(1);
         linkList.insertFromHead(2);
         linkList.insertFromHead(3);
@@ -50,6 +51,17 @@ public class SingleLinkListTest extends TestCase {
         linkList.insertFromHead(5);
         linkList.insertFromHead(6);
         linkList.printLinkList(linkList.reverseLinkList());
+    }
+
+    public void testReverseLinkList2() throws Exception{
+        System.out.println("递归反转链表");
+        linkList.insertFromHead(1);
+        linkList.insertFromHead(2);
+        linkList.insertFromHead(3);
+        linkList.insertFromHead(4);
+        linkList.insertFromHead(5);
+        linkList.insertFromHead(6);
+        linkList.printLinkList(linkList.reverseLinkList(linkList.getHead()));
     }
     public void testGetHead() throws Exception {
     }

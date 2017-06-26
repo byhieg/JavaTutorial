@@ -43,7 +43,10 @@ public class SingleLinkList {
         return head;
     }
 
-
+    /**
+     * 反转链表的非递归实现
+     * @return
+     */
     public Node reverseLinkList() {
         if (head == null) {
             return head;
@@ -62,6 +65,23 @@ public class SingleLinkList {
         }
         return reverseHead;
     }
+
+
+    /**
+     * 反转链表的递归实现
+     * @return
+     */
+    public Node reverseLinkList(Node head){
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Node newNode = reverseLinkList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newNode;
+    }
+
+
 
     /**
      * 打印链表
